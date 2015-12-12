@@ -2,17 +2,21 @@ require 'pry'
 
 class BubbleSort
   def sort(array)
-    array.length.times do
-      previous, current = 0, 1
-      while current < array.length
-        if array[previous] > array[current]
-          array[previous], array[current] = array[current], array[previous]
+    if !array
+      nil
+    else
+      array.length.times do
+        previous, current = 0, 1
+        while current < array.length
+          if array[previous] > array[current]
+            array[previous], array[current] = array[current], array[previous]
+          end
+          previous += 1
+          current += 1
         end
-        previous += 1
-        current += 1
       end
+      array
     end
-    array
   end
 end
 

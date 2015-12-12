@@ -15,6 +15,10 @@ class BubbleSortTest < Minitest::Test
     assert_instance_of BubbleSort, @sorted
   end
 
+  def test_parameter_can_be_nil
+    assert_nil @sorted.sort(nil)
+  end
+
   def test_can_sort_an_empty_array
     assert_equal [], @sorted.sort([])
   end
