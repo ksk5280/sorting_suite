@@ -50,6 +50,10 @@ class MergeSortTest < Minitest::Test
     assert_equal [1,2,3,4,5], @sorter.sort([2,5,4,3,1])
   end
 
+  def test_can_sort_a_reversed_array_of_five
+    assert_equal [0, 1, 2, 3, 4], @sorter.sort([4, 3, 2, 1, 0])
+  end
+
   def test_can_sort_an_array_of_five_letters
     assert_equal ["a","b","c","d","e"], @sorter.sort(["b","a","e","d","c"])
   end

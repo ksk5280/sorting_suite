@@ -59,6 +59,10 @@ class BubbleSortTest < Minitest::Test
     assert_equal ["a", "a", "b", "d"], @sorted.sort(["a", "b", "d", "a"])
   end
 
+  def test_can_sort_a_reversed_array_of_five
+    assert_equal [0, 1, 2, 3, 4], @sorted.sort([4, 3, 2, 1, 0])
+  end
+
   def test_can_sort_an_array_of_six_numbers
     assert_equal [3, 20, 23, 48, 54, 63], @sorted.sort([48, 23, 63, 54, 3, 20])
   end
