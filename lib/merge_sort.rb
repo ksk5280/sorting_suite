@@ -1,27 +1,13 @@
 require 'pry'
 
 class MergeSort
-  attr_reader :sorted
+	def sort(unsorted)
+		return nil if unsorted.nil?
+		return unsorted if unsorted.length <= 1
+		merge(split(unsorted))
+	end
 
-  def initialize
-    @sorted = []
-  end
-
-  def sort(unsorted)
-    if !unsorted
-      nil
-    elsif unsorted.length == 0
-      []
-    elsif unsorted.length == 1
-      unsorted
-    else
-    split_array = split(unsorted)
-    # => [[2], [[3], [1]]]
-    merge(split_array) # =>
-    end
-  end
-
-  def split(unsorted)
+	def split(unsorted)
     mid = unsorted.length / 2
     left = unsorted[0...mid]
     right = unsorted[mid..-1]
@@ -31,84 +17,44 @@ class MergeSort
     if right.length > 1
       right = split(right)
     end
-    split_array = [left, right] # => [[3], [1]], [[2], [[3], [1]]]
+    split_array = [left, right]
   end
 
-  def look
+	def merge(split_array)
+		return split_array if split_array.length == 1
+		sorter(merge(split_array[0]), merge(split_array[1]))
+	end
 
-  end
+	def sorter(left_array, right_array)
+		sorted = []
+		left = left_array.shift
+		right = right_array.shift
 
-  def merge(split_array)
-    split_array # => [[2], [[3], [1]]]
-    if split_array[0].length == 0
-      sorted << split_array[1].shift
-    elsif split_array[1].length == 0
-      sorted << split_array[0].shift
-    end
-    sorted # => []
-    left = split_array[0] # => [2]
-    right = split_array[1] # => [[3], [1]]
-    left.length # => 1
-    left.length # => 1
-    if left.length == 0 && right.length == 0
-      sorted
-    elsif split_array[0][0] < split_array[1][0] # ~> ArgumentError: comparison of Fixnum with Array failed
-      sorted << split_array[0].shift
-    else
-      sorted << split_array[1].shift
-    end
+		while left || right
+			insert_left = false
 
-    sorted # =>
-    split_array # =>
-    if split_array[0].length == 0 && split_array[1].length == 0
-      sorted
-    else
-      merge(split_array)
-    end
-  end
-  #
-  #   sorted[0][0][0]# => 1
-  #   sorted[1][0][0] # => NoMethodError: undefined method `[]' for nil:NilClass
-  #   if sorted[0][0][0] < sorted[1][0][0]
-  #     new_sorted << sorted[0].shift # =>
-  #     sorted # =>
-  #   else
-  #     new_sorted << sorted[1].shift
-  #   end
-  #
-  #   sorted # =>
-  #   new_sorted # =>
-  #   if sorted[0][0][0] < sorted[1][0][0]
-  #     new_sorted << sorted[0].shift
-  #   else
-  #     new_sorted << sorted[1].shift
-  #   end
-  #
-  #   sorted # =>
-  #   new_sorted # =>
-  #   if sorted[0][0][0] < sorted[1][0][0]
-  #     new_sorted << sorted[0].shift
-  #   else
-  #     new_sorted << sorted[1].shift
-  #   end
-  #
-  #   sorted # =>
-  #   new_sorted # =>
-  #
-  #   new_sorted.flatten # =>
-  # end
+			if left && right
+				insert_left = left < right
+			elsif left && !right
+				insert_left = true
+			elsif !left && right
+				insert_left = false
+			end
+
+			if insert_left
+				sorted << left
+				left = left_array.empty? ? nil : left_array.shift
+			else
+				sorted << right
+				right = right_array.empty? ? nil : right_array.shift
+			end
+		end
+		sorted
+	end
 end
 
 
 if __FILE__ == $0
-  array = MergeSort.new
-  array.sort([2,3,1]) # =>
+  sorter = MergeSort.new # => #<MergeSort:0x007f9f2b02d4e8>
+	sorter.sort(["d","b","a","c"]) # => ["a", "b", "c", "d"]
 end
-
-# ~> ArgumentError
-# ~> comparison of Fixnum with Array failed
-# ~>
-# ~> /Users/kimiko/Documents/Turing/1module/projects/sorting_suite/lib/merge_sort.rb:55:in `<'
-# ~> /Users/kimiko/Documents/Turing/1module/projects/sorting_suite/lib/merge_sort.rb:55:in `merge'
-# ~> /Users/kimiko/Documents/Turing/1module/projects/sorting_suite/lib/merge_sort.rb:20:in `sort'
-# ~> /Users/kimiko/Documents/Turing/1module/projects/sorting_suite/lib/merge_sort.rb:105:in `<main>'
