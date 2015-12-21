@@ -64,6 +64,8 @@ class BubbleSortTest < Minitest::Test
   end
 
   def test_can_sort_an_array_of_six_numbers
-    assert_equal [3, 20, 23, 48, 54, 63], @sorted.sort([48, 23, 63, 54, 3, 20])
+    expected = [3, 20, 23, 48, 54, 63]
+    actual = @sorted.sort([48, 23, 63, 54, 3, 20])
+    assert_equal expected, actual
   end
 end
