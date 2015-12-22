@@ -67,15 +67,23 @@ A benchmarking program was writing to calculate and compare the speed of the sor
 ```ruby
 benchmark = SortingSuite::Benchmark.new
 
-benchmark.time(SortingSuite::InsertionSort, [3,3,4,5,1])
-=> "InsertionSort took 0.004333 seconds"
+arr = benchmark.arr_generator(1000)
 
-benchmark.time(SortingSuite::MergeSort)
-=> "MergeSort took 0.000274 seconds"
+benchmark.time(SortingSuite::BubbleSort, arr)
+=> "BubbleSort took 0.081427 seconds"
 
-benchmark.fastest([2, 8, 1, 0, 5])
+benchmark.time(SortingSuite::InsertionSort, arr)
+=> "InsertionSort took 0.029386 seconds"
+
+benchmark.time(SortingSuite::MergeSort, arr)
+=> "MergeSort took 0.002168 seconds"
+
+benchmark.time_compare(arr)
+=> {"BubbleSort"=>"0.087772", "InsertionSort"=>"0.028390", "MergeSort"=>"0.001860"}
+
+benchmark.fastest(arr)
 => "MergeSort is the fastest"
 
-benchmark.slowest([1, 2, 3, 4, 5])
+benchmark.slowest(arr)
 => "BubbleSort is the slowest"
 ```
