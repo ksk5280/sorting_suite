@@ -15,8 +15,8 @@ module SortingSuite
 
     def time_compare(arr)
       bubble    = time(SortingSuite::BubbleSort,    arr)
-      insertion = time(SortingSuite::InsertionSort, arr)
       merge     = time(SortingSuite::MergeSort,     arr)
+      insertion = time(SortingSuite::InsertionSort, arr)
       sentences = [bubble, insertion, merge]
 
       sorters = sentences.map do |sentence|
@@ -41,13 +41,19 @@ module SortingSuite
       slow = sorters_and_times.select { |_, v| v == sorters_and_times.values.max }
       "#{slow.keys[0]} is the slowest"
     end
+
+    def arr_generator(size)
+      arr = []
+      size.times {|n| arr << rand(1000)}
+      arr
+    end
   end
 end
 
 if __FILE__ == $0
   benchmark = SortingSuite::Benchmark.new
-  arr = [12,10,3,9,3,8,7,4,5,1,2]
-  benchmark.time_compare(arr)
-  benchmark.fastest(arr)
-  benchmark.slowest(arr)
+  arr = benchmark.arr_generator(1000) 
+  benchmark.time_compare(arr) # => {"BubbleSort"=>"0.087772", "InsertionSort"=>"0.028390", "MergeSort"=>"0.001860"}
+  benchmark.fastest(arr) # => "MergeSort is the fastest"
+  benchmark.slowest(arr) # => "BubbleSort is the slowest"
 end
