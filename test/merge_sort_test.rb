@@ -3,15 +3,15 @@ require "merge_sort"
 
 class MergeSortTest < Minitest::Test
   def setup
-    @sorter = MergeSort.new
+    @sorter = SortingSuite::MergeSort.new
   end
 
   def test_class_exists
-    assert MergeSort
+    assert SortingSuite::MergeSort
   end
 
   def test_can_create_instances
-    assert_instance_of MergeSort, @sorter
+    assert_instance_of SortingSuite::MergeSort, @sorter
   end
 
   def test_parameter_can_be_nil

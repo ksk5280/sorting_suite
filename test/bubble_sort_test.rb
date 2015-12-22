@@ -4,15 +4,15 @@ require 'bubble_sort'
 
 class BubbleSortTest < Minitest::Test
   def setup
-    @sorted = BubbleSort.new
+    @sorted = SortingSuite::BubbleSort.new
   end
 
   def test_class_exists
-    assert BubbleSort
+    assert SortingSuite::BubbleSort
   end
 
   def test_can_create_instances
-    assert_instance_of BubbleSort, @sorted
+    assert_instance_of SortingSuite::BubbleSort, @sorted
   end
 
   def test_parameter_can_be_nil

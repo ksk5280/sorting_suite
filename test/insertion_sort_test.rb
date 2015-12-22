@@ -4,15 +4,15 @@ require 'pry'
 
 class InsertionSortTest < Minitest::Test
   def setup
-    @sorter = InsertionSort.new
+    @sorter = SortingSuite::InsertionSort.new
   end
 
   def test_class_exists
-    assert InsertionSort
+    assert SortingSuite::InsertionSort
   end
 
   def test_can_create_instances
-    assert_instance_of InsertionSort, @sorter
+    assert_instance_of SortingSuite::InsertionSort, @sorter
   end
 
   def test_parameter_can_be_nil
