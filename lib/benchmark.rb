@@ -22,7 +22,7 @@ module SortingSuite
       sorters = sentences.map do |sentence|
         sentence.split[0]
       end
-      
+
       times = sentences.map do |sentence|
         sentence.split[2]
       end
@@ -34,7 +34,6 @@ module SortingSuite
       sorters_and_times = time_compare(arr)
       fast = sorters_and_times.select { |_, v| v == sorters_and_times.values.min }
       "#{fast.keys[0]} is the fastest"
-
     end
 
     def slowest(arr)
@@ -47,8 +46,8 @@ end
 
 if __FILE__ == $0
   benchmark = SortingSuite::Benchmark.new
-  arr = [3,3,4,5,1]
-
-  benchmark.fastest(arr) # => "InsertionSort is the fastest"
-  benchmark.slowest(arr) # => "MergeSort is the slowest"
+  arr = [12,10,3,9,3,8,7,4,5,1,2]
+  benchmark.time_compare(arr)
+  benchmark.fastest(arr)
+  benchmark.slowest(arr)
 end
